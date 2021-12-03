@@ -6,11 +6,12 @@
 
 .buttonvarient {
   justify-content: end;
+  margin-top: 20px;
 }
 
 .main-div {
   width: 40rem;
-  height: 17rem;
+  height: 20rem;
   border: 1px solid white;
   margin: 100px auto;
   box-shadow: 0 0 20px;
@@ -29,4 +30,9 @@
   box-shadow: 0 0 20px;
   background-color: whitesmoke;
   border-radius: 4px;
+}
+
+.form-select {
+  width: 50%;
+  margin: 0 auto;
 }

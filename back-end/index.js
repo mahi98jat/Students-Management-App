@@ -1,9 +1,10 @@
 const express = require("express");
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 6677;
+const cors = require("cors");
 require("dotenv").config();
 const app = express();
 const connect = require("./src/config/db.js"); // import connection module for connectivity;
-
+app.use(cors());
 // importing students and contests controller here
 const students = require("./src/controllers/students.controller.js");
 const contests = require("./src/controllers/contest.controller.js");
