@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 export default function AdminPage() {
   const [studentData, setStudentData] = useState({});
@@ -15,7 +16,10 @@ export default function AdminPage() {
     e.preventDefault();
     //console.log(studentData);
 
-    let res = await axios.post("http://localhost:6677/students", studentData);
+    let res = await axios.post(
+      "http://localhost:6677/students",
+      studentData
+    );
 
     console.log(res);
 
@@ -24,9 +28,18 @@ export default function AdminPage() {
   return (
     <div>
       <div className="navbar">
-        <Button variant="primary">Student Details</Button>
-        <Button variant="primary">Contest Details</Button>
-        <Button variant="primary">View Contest</Button>
+        <Link to="/admin">
+          <Button variant="primary">Student Details</Button>
+        </Link>
+        <Link to="/contest">
+          <Button variant="primary">Contest Details</Button>
+        </Link>
+        <Link to="/othercontest">
+          <Button variant="primary">View Contest Details</Button>
+        </Link>
+        <Link to="/otherstudent">
+          <Button variant="primary">View Student Details</Button>
+        </Link>
       </div>
       <div className="Studentform">
         <Form>
@@ -56,7 +69,9 @@ export default function AdminPage() {
               <Form.Control
                 type="text"
                 name="education"
-                value={studentData.education ? studentData.education : ""}
+                value={
+                  studentData.education ? studentData.education : ""
+                }
                 onChange={(e) => handleInputChange(e)}
                 placeholder="Enter Qualification"
               />
