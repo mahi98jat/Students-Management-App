@@ -4,24 +4,33 @@ import { Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Styles/Login.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
 export default function Login() {
   const [state, setstate] = useState(true);
   const [loginData, setLoginData] = useState({});
-
+  const [showAdmin, setShowAdmin] = useState("");
+  let history = useHistory();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLoginData({ ...loginData, [name]: value });
   };
 
   const handleClick = async () => {
-    await axios
-      .post("http://localhost:6677/login", loginData)
-      .then((res) => {
-        console.log(res);
-      });
+    let res = await axios.post("http://localhost:6677/login", loginData);
+    let {
+      data: { token: token },
+    } = res;
+    let [role] = token.split("$$$");
+    // console.log(token, role);
+    setShowAdmin(token);
+    if (token) {
+      alert(`login successfull as an ${role}`);
+    }
+    if (role === "admin") {
+      history.push("/admin");
+    }
   };
   const openform = () => {
     setstate(false);
