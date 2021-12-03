@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios'
 import "../Styles/Contestdata.css";
 import { Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,9 +8,20 @@ import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 
 export default function ContestFill() {
-  const handleInputChange = () => {};
+  const [contestData, setContestData] = useState({});
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setContestData({ ...contestData, [name]: value });
+  };
 
-  const handleSave = () => {};
+  const handleSave = async (e) => {
+    e.preventDefault();
+    console.log(contestData)
+    let res = await axios.post("http://localhost:6677/contest", contestData);
+
+    console.log(res);
+    setContestData({});
+  };
   return (
     <div>
       <div className="navbar">
@@ -33,9 +45,9 @@ export default function ContestFill() {
             <Form.Control
               type="text"
               name="title"
-              //   value={studentData.name ? studentData.name : ""}
+              value={contestData.title ? contestData.title : ""}
               onChange={(e) => handleInputChange(e)}
-              placeholder="Enter name"
+              placeholder="Enter Title"
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -43,9 +55,9 @@ export default function ContestFill() {
             <Form.Control
               type="text"
               name="topic"
-              //   value={studentData.city ? studentData.city : ""}
+              value={contestData.topic ? contestData.topic : ""}
               onChange={(e) => handleInputChange(e)}
-              placeholder="Enter City"
+              placeholder="Enter Topic"
             />
           </Form.Group>
           <div className="middle-div">
@@ -54,7 +66,7 @@ export default function ContestFill() {
               <Form.Control
                 type="text"
                 name="Start_date"
-                // value={studentData.age ? studentData.age : ""}
+                value={contestData.Start_date ? contestData.Start_date : ""}
                 onChange={(e) => handleInputChange(e)}
                 placeholder="Enter Start Date"
               />
@@ -64,10 +76,10 @@ export default function ContestFill() {
               <Form.Label>Enter End Date</Form.Label>
               <Form.Control
                 name="End_date"
-                // value={studentData.gender ? studentData.gender : ""}
+                value={contestData.End_date ? contestData.End_date : ""}
                 onChange={(e) => handleInputChange(e)}
                 type="text"
-                placeholder="Enter Gender"
+                placeholder="Enter Date"
               />
             </Form.Group>
           </div>
