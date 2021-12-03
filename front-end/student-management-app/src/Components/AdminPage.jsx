@@ -14,7 +14,7 @@ export default function AdminPage() {
   };
   const handleSave = async (e) => {
     e.preventDefault();
-    //console.log(studentData);
+   
 
     let res = await axios.post(
       "http://localhost:6677/students",
