@@ -16,7 +16,10 @@ export default function Studentdata() {
     setStudentDetails(data);
     setLoading(false);
   };
-
+  const removeStudent = async (id) => {
+    await axios.delete(`http://localhost:6677/students/delete/${id}`);
+    getData();
+  };
   useEffect(() => {
     getData();
   }, []);
@@ -40,6 +43,11 @@ export default function Studentdata() {
       <div className="details-div">
         {loading ? (
           <h3>We are fetching the details</h3>
+        ) : studentDetails.length === 0 ? (
+          <h1>
+            students have to add. There is no data present in database for
+            students.
+          </h1>
         ) : (
           studentDetails.map((e) => (
             <div>
@@ -49,7 +57,9 @@ export default function Studentdata() {
               <p>{e.gender}</p>
               <p>{e.city}</p>
               <p>{e.contact}</p>
-              <Button variant="primary">Remove Student</Button>
+              <Button variant="primary" onClick={() => removeStudent(e._id)}>
+                Remove Student
+              </Button>
             </div>
           ))
         )}

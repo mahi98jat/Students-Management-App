@@ -7,17 +7,21 @@ import { Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 
-export default function Contestshowdata() {
+export default function Contestshowdata(props) {
+  console.log(props);
   const [loading, setLoading] = useState(true);
   const [contestDetails, setConstestDetails] = useState([]);
   const getData = async () => {
     let res = await axios.get("http://localhost:6677/contest");
-    console.log(res);
+    //console.log(res);
     let { data } = res;
     setConstestDetails(data);
     setLoading(false);
   };
-
+  const removeContest = async (id) => {
+    await axios.delete(`http://localhost:6677/contest/delete/${id}`);
+    getData();
+  };
   useEffect(() => {
     getData();
   }, []);
@@ -30,7 +34,7 @@ export default function Contestshowdata() {
         <Link to="/contest">
           <Button variant="primary">Contest Details</Button>
         </Link>
-        <Link to="/othercontest">
+        <Link to="/othercontest/:id">
           <Button variant="primary">View Contest Details</Button>
         </Link>
         <Link to="/otherstudent">
@@ -40,6 +44,10 @@ export default function Contestshowdata() {
       <div className="details-div">
         {loading ? (
           <h3>We are fetching the details</h3>
+        ) : contestDetails.length === 0 ? (
+          <h1>
+            contest have to added by admin. Yet no contest are there on website.
+          </h1>
         ) : (
           contestDetails.map((e) => (
             <div>
@@ -47,7 +55,9 @@ export default function Contestshowdata() {
               <h4>{e.topic}</h4>
               <p>{e.Start_date}</p>
               <p>{e.End_date}</p>
-              <Button variant="primary">Remove Contest</Button>
+              <Button variant="primary" onClick={() => removeContest(e._id)}>
+                Remove Contest
+              </Button>
             </div>
           ))
         )}
