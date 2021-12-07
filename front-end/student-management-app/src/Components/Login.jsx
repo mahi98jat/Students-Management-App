@@ -17,19 +17,25 @@ export default function Login() {
     setLoginData({ ...loginData, [name]: value });
   };
 
-  const handleClick = async () => {
+  const handleClick = async (e) => {
+    //console.log("I am clicking button");
+    e.preventDefault();
     let res = await axios.post("http://localhost:6677/login", loginData);
+    console.log(res);
     let {
       data: { token: token },
     } = res;
     let [role] = token.split("$$$");
-    // console.log(token, role);
+    console.log(token, role);
     setShowAdmin(token);
+    //console.log(role);
     if (token) {
       alert(`login successfull as an ${role}`);
     }
     if (role === "admin") {
       history.push("/admin");
+    } else if (role === "user") {
+      history.push("/othercontest");
     }
   };
   const openform = () => {
@@ -83,7 +89,7 @@ export default function Login() {
           <Button
             className="buttonvarient"
             variant="primary"
-            onClick={handleClick}
+            onClick={(e) => handleClick(e)}
           >
             Login
           </Button>

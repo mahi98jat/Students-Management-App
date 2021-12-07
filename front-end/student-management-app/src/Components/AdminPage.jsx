@@ -14,12 +14,8 @@ export default function AdminPage() {
   };
   const handleSave = async (e) => {
     e.preventDefault();
-   
 
-    let res = await axios.post(
-      "http://localhost:6677/students",
-      studentData
-    );
+    let res = await axios.post("http://localhost:6677/students", studentData);
 
     console.log(res);
 
@@ -69,9 +65,7 @@ export default function AdminPage() {
               <Form.Control
                 type="text"
                 name="education"
-                value={
-                  studentData.education ? studentData.education : ""
-                }
+                value={studentData.education ? studentData.education : ""}
                 onChange={(e) => handleInputChange(e)}
                 placeholder="Enter Qualification"
               />
