@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 
 const uri =
-  "mongodb+srv://mahipal:mahi123@cluster0.5zugh.mongodb.net/Students-Data?retryWrites=true&w=majority";
-
+  "mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb";
+// const local = "mongodb://127.0.0.1:27017/management";
 async function connect() {
-  
   try {
     return await mongoose.connect(uri);
   } catch (err) {
