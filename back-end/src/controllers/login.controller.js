@@ -6,6 +6,7 @@ router.post("/add", async (req, res) => {
   await Login.create(req.body);
   res.status(200).send("user added successfully");
 });
+
 router.post("", async (req, res) => {
   try {
     let { role, email, password } = req.body;
@@ -14,7 +15,9 @@ router.post("", async (req, res) => {
     let Email = email.split("@");
     // console.log(Email);
     if (Email[1] !== "masai.school") {
-      return res.status(400).send("please fill correct email and password");
+      return res
+        .status(400)
+        .send("please fill correct email and password");
     }
     // finding the user/admin in database is it present there or not.
 

@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 
 //const uri =
+const uri =
   "mongodb+srv://mahipal:mahi123@cluster0.5zugh.mongodb.net/Students-Data?retryWrites=true&w=majority";
 const local = "mongodb://127.0.0.1:27017/management";
+
 async function connect() {
-  
   try {
     return await mongoose.connect(local);
   } catch (err) {

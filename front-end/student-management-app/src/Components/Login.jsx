@@ -20,7 +20,10 @@ export default function Login() {
   const handleClick = async (e) => {
     //console.log("I am clicking button");
     e.preventDefault();
-    let res = await axios.post("http://localhost:6677/login", loginData);
+    let res = await axios.post(
+      "http://localhost:6677/login",
+      loginData
+    );
     console.log(res);
     let {
       data: { token: token },
@@ -33,9 +36,15 @@ export default function Login() {
       alert(`login successfull as an ${role}`);
     }
     if (role === "admin") {
-      history.push("/admin");
+      history.push({
+        pathname: "/othercontest",
+        state: { name: `${role}` },
+      });
     } else if (role === "user") {
-      history.push("/othercontest");
+      history.push({
+        pathname: "/othercontest",
+        state: { name: `${role}` },
+      });
     }
   };
   const openform = () => {
