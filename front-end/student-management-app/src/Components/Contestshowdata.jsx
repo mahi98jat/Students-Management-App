@@ -10,15 +10,17 @@ import { Link, useLocation } from "react-router-dom";
 export default function Contestshowdata() {
   let location = useLocation();
   var res = location.state.name;
-  //console.log(res);
+  console.log(res);
   const [loading, setLoading] = useState(true);
   const [contestDetails, setConstestDetails] = useState([]);
-  const [data, setDate] = useState(res);
+  const [dataa, setDate] = useState(res);
+  console.log(dataa);
 
   const getData = async () => {
     let res = await axios.get("http://localhost:6677/contest");
     //console.log(res);
     let { data } = res;
+    console.log({ data });
     setConstestDetails(data);
     setLoading(false);
   };
@@ -28,30 +30,38 @@ export default function Contestshowdata() {
   };
   useEffect(() => {
     getData();
-  }, [data]);
+  }, []);
   return (
     <div>
       <div className="navbar">
-        {data === "admin" ? (
+        {dataa === "admin" ? (
           <Link to="/admin" className="disabledCursor">
-            <Button variant="primary">Student Details</Button>
+            <Button variant="primary">Student Add</Button>
           </Link>
         ) : null}
-        {data === "admin" ? (
+        {dataa === "admin" ? (
           <Link to="/contest" className="disabledCursor">
-            <Button variant="primary">Contest Details</Button>
+            <Button variant="primary">Contest Add</Button>
           </Link>
         ) : null}
-        {data === "admin" ? (
+        {dataa === "admin" ? (
           <Link to="/othercontest">
-            <Button variant="primary">View Contest Details</Button>
+            <Button
+              variant="primary"
+              onClick={(e) => e.preventDefault()}
+            >
+              View Contest Details
+            </Button>
           </Link>
         ) : null}
-        {data === "admin" ? (
+        {dataa === "admin" ? (
           <Link to="/otherstudent" className="disabledCursor">
             <Button variant="primary">View Student Details</Button>
           </Link>
         ) : null}
+        <Link to="/">
+          <Button variant="primary">Logout</Button>
+        </Link>
       </div>
       <div className="details-div">
         {loading ? (
@@ -102,7 +112,7 @@ export default function Contestshowdata() {
                 variant="primary"
                 onClick={() => removeContest(e._id)}
               >
-                {data === "admin"
+                {dataa === "admin"
                   ? "Delete Contest"
                   : "Attempt Contest"}
               </Button>

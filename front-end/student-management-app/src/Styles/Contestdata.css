@@ -25,3 +25,14 @@
 .disabledCursor {
   cursor: default;
 }
+
+.innerdiv1 {
+  border: 1px solid white;
+  background: whitesmoke;
+  box-shadow: 0 0 10px;
+  width: 350px;
+  height: 340px;
+  margin-left: 50px;
+  margin-top: 15px;
+  padding: 10px;
+}

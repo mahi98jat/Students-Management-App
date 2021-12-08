@@ -56,6 +56,10 @@ export default function Login() {
         <Button variant="primary" className="fgh" onClick={openform}>
           Log In
         </Button>{" "}
+        <img
+          style={{ marginTop: "100px" }}
+          src="https://149501111.v2.pressablecdn.com/wp-content/uploads/2020/12/Student-Management-System.jpg"
+        ></img>
       </div>
     </>
   ) : (
