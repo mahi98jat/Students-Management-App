@@ -15,7 +15,10 @@ export default function AdminPage() {
   const handleSave = async (e) => {
     e.preventDefault();
 
-    let res = await axios.post("http://localhost:6677/students", studentData);
+    let res = await axios.post(
+      "http://localhost:6677/students",
+      studentData
+    );
 
     console.log(res);
 
@@ -25,16 +28,19 @@ export default function AdminPage() {
     <div>
       <div className="navbar">
         <Link to="/admin">
-          <Button variant="primary">Student Details</Button>
+          <Button variant="primary">Student Add</Button>
         </Link>
         <Link to="/contest">
-          <Button variant="primary">Contest Details</Button>
+          <Button variant="primary">Contest Add</Button>
         </Link>
         <Link to="/othercontest">
           <Button variant="primary">View Contest Details</Button>
         </Link>
         <Link to="/otherstudent">
           <Button variant="primary">View Student Details</Button>
+        </Link>
+        <Link to="/">
+          <Button variant="primary">Logout</Button>
         </Link>
       </div>
       <div className="Studentform">
@@ -65,7 +71,9 @@ export default function AdminPage() {
               <Form.Control
                 type="text"
                 name="education"
-                value={studentData.education ? studentData.education : ""}
+                value={
+                  studentData.education ? studentData.education : ""
+                }
                 onChange={(e) => handleInputChange(e)}
                 placeholder="Enter Qualification"
               />
